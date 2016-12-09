@@ -39,8 +39,12 @@ var todoList = {
     }
   },
   toggleCompleted: function(num) {
-    this.todos[num].completed = !this.todos[num].completed;
-    this.displayTodos();
+    if(this.todos.length === 0) {
+      console.log("you have no todos");
+    } else {
+      this.todos[num].completed = !this.todos[num].completed;
+      this.displayTodos();
+    }
   },
   toggleAll: function() {
     var completedTodos = 0,
@@ -68,6 +72,24 @@ var todoList = {
   
 }; //end object
 
+var handler = {
+  
+  display: function() {
+    todoList.displayTodos();
+  },
+  add: function() {
+    var addTextInput = document.getElementById("add-text");
+    todoList.addTodo(addTextInput.value);
+    addTextInput.nodeValue = "";
+    
+  },
+  toggleAll: function() {
+    todoList.toggleAll();
+  },
+  toggleCompleted: function(num) {
+    todoList.toggleCompleted();
+  }
+};
 
 
 
