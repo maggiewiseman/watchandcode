@@ -41,9 +41,11 @@ var todoList = {
   toggleCompleted: function(num) {
     if(this.todos.length === 0) {
       console.log("you have no todos");
-    } else {
+    } else if (this.todos[num]){
       this.todos[num].completed = !this.todos[num].completed;
       this.displayTodos();
+    } else {
+      console.log("there was no todo at position: " + num);
     }
   },
   toggleAll: function() {
@@ -80,14 +82,28 @@ var handler = {
   add: function() {
     var addTextInput = document.getElementById("add-text");
     todoList.addTodo(addTextInput.value);
-    addTextInput.nodeValue = "";
+    addTextInput.value = "";
     
+  },
+  change: function() {
+    var num = document.getElementById("change-num"),
+        text = document.getElementById("change-text");
+    todoList.changeTodo(num.value, text.value);
+    num.value = "";
+    text.value = "";
+  },
+  delete: function() {
+    var num = document.getElementById("delete-num");
+    todoList.deleteTodo(num.value);
+    num.value = "";
   },
   toggleAll: function() {
     todoList.toggleAll();
   },
-  toggleCompleted: function(num) {
-    todoList.toggleCompleted();
+  toggleCompleted: function() {
+    var num = document.getElementById("completed-num");
+    todoList.toggleCompleted(num.value);
+    num.value = "";
   }
 };
 

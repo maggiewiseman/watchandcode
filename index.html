@@ -15,21 +15,25 @@
       <input type="text" id="add-text" placeholder="type change here"/>
     </div>
     
+    <div>
+      <button onclick="handler.change()">Change</button>
+      <input type="text" id="change-num" maxlength="3" placeholder="1"/>
+      <input type="text" id="change-text" placeholder="type change here"/>
+    </div>
+    
+     <div>
+      <button onclick="handler.delete()">Delete</button>
+      <input type="text" id="delete-num" maxlength="3" placeholder="1"/>
+    </div>
+    
     <button onclick="handler.toggleAll()">Toggle All Todos</button>
     <div>
       <button onclick="handler.toggleCompleted()">Toggle Completed</button>
       <input type="text" id="completed-num" maxlength="3" placeholder="1"/>
     </div>
-    <div>
-      <button>Change</button>
-      <input type="text" id="change-num" maxlength="3" placeholder="1"/>
-      <input type="text" id="change-text" placeholder="type change here"/>
-    </div>
     
-    <div>
-      <button>Delete</button>
-      <input type="text" id="delete-num" maxlength="3" placeholder="1"/>
-    </div>
+    
+   
   </body>
 
 </html>
