@@ -107,8 +107,28 @@ var handler = {
   }
 };
 
-
-
+//note to self - need to work out how I will add the checkbox feature.
+//will I use the display todos method? 
+var view = {
+  display: function() {
+    var ulElement = document.querySelector("ul");
+    // clear out ul before the for loop runs
+    ulElement.innerHTML = "";
+    
+    for(var i = 0; i < todoList.todos.length; i++) {  
+      var liElement = document.createElement("li");
+      var todoTextWithCompletion = '';
+      if(todoList.todos[i].completed) {
+          todoTextWithCompletion = "(x) " + todoList.todos[i].todoText;
+        } else {
+          todoTextWithCompletion = "( ) " + todoList.todos[i].todoText;
+        }
+      
+      liElement.textContent = todoTextWithCompletion;
+      ulElement.appendChild(liElement);
+    }
+  }
+};
 ////remember slice deletes after the number provided, so if they want to delete 2, tell slice to delete after 1
 //function deleteTodo(position) {
 //  
