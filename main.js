@@ -9,6 +9,7 @@ var todoList = {
     });
   },  
   changeTodo: function(num, newTodo) {
+    
     if(this.todos[num]){
       this.todos[num].todoText = newTodo;
     }else {
@@ -25,21 +26,21 @@ var todoList = {
     var completedTodos = 0,
         totalTodos = this.todos.length;
     
-    //count todos that are comppleted (completed = true)
+
     this.todos.forEach(function(todos){
-      if(todos.completed) { //completed is true so count it
+      //Case 1: Is this todo complete? If yes, count it
+      if(todos.completed) { 
         completedTodos++;
       }
     });
     
-    //compare num completed to total num to see if need to toggle all to incomplete
-    //only occurs when all items have been checked off already
+    //Case 1: Are ALL of the todos complete? If yes, set todo.complete to false
     if(completedTodos === totalTodos) {
       this.todos.forEach(function(todos){
         todos.completed = false;
       });
+    //Case 2: At least 1 todo is incomplete, set all todo.complete to true  
     } else {
-      //toggle all to true (add check)
       this.todos.forEach(function(todos) {
         todos.completed = true;
       });
@@ -84,22 +85,27 @@ var handler = {
 var view = {
   display: function() {
     var ulElement = document.querySelector("ul");
-    // clear out ul before the for loop runs
+    // clear out ul before the for loop runs so that the this run replaces rather than appends old run
     ulElement.innerHTML = "";
     
-    for(var i = 0; i < todoList.todos.length; i++) {  
+    todoList.todos.forEach(function(todo, position){
       var liElement = document.createElement("li");
+      
+      //string that will hold the text to be added to the li and displayed
       var todoTextWithCompletion = '';
-      if(todoList.todos[i].completed) {
-          todoTextWithCompletion = "(x) " + todoList.todos[i].todoText;
-        } else {
-          todoTextWithCompletion = "( ) " + todoList.todos[i].todoText;
-        }
-      liElement.id = i;
+     
+      //Case 1: Is the todo completed? (todo.complete = true)
+      if(todo.completed) {
+          todoTextWithCompletion = "(x) " + todo.todoText;
+      //Case 2: Todo is not completed
+      } else {
+        todoTextWithCompletion = "( ) " + todo.todoText;
+      }
+      liElement.id = position;
       liElement.textContent = todoTextWithCompletion;
-      liElement.appendChild(this.createDeleteButton());
+      liElement.appendChild(view.createDeleteButton());
       ulElement.appendChild(liElement);
-    }
+    });
   },
   createDeleteButton: function () {
     var deleteBtn = document.createElement("button");
@@ -111,10 +117,11 @@ var view = {
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
       console.log(event);
-       //check to see if item clicked was delete button or the checkbox/item
+       //Case 1: Was delete button clicked?
        if(event.target.className === "delete-btn") {     
          handler.delete(parseInt(event.target.parentNode.id));
        }
+       //Case 2: Was li text clicked? 
        if(event.target.tagName === "LI"){
          handler.toggleCompleted(parseInt(event.target.id));
        }
