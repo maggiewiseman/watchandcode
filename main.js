@@ -103,9 +103,9 @@ var view = {
       }
       liElement.id = position;
       liElement.textContent = todoTextWithCompletion;
-      liElement.appendChild(view.createDeleteButton());
+      liElement.appendChild(this.createDeleteButton());
       ulElement.appendChild(liElement);
-    });
+    }, this);
   },
   createDeleteButton: function () {
     var deleteBtn = document.createElement("button");
