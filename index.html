@@ -3,13 +3,13 @@
 
   <head>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+    
   </head>
 
   <body>
     <h1>Hello Todo List!</h1>
     
-    <button onclick="handler.display()">Display Todos</button>
+   
     <div>
       <button onclick="handler.add()">Add</button>
       <input type="text" id="add-text" placeholder="type change here"/>
@@ -20,21 +20,14 @@
       <input type="text" id="change-num" maxlength="3" placeholder="1"/>
       <input type="text" id="change-text" placeholder="type change here"/>
     </div>
-    
-     <div>
-      <button onclick="handler.delete()">Delete</button>
-      <input type="text" id="delete-num" maxlength="3" placeholder="1"/>
-    </div>
+
     
     <button onclick="handler.toggleAll()">Toggle All Todos</button>
-    <div>
-      <button onclick="handler.toggleCompleted()">Toggle Completed</button>
-      <input type="text" id="completed-num" maxlength="3" placeholder="1"/>
-    </div>
+    
     <ul>
     </ul>
     
-   
+   <script src="main.js"></script>
   </body>
 
 </html>

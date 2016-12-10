@@ -1,31 +1,16 @@
-
+/* jshint devel: true, browser: true */
 var todoList = {
   todos: [],
-  displayTodos: function() {
-    if (this.todos.length === 0) {
-      console.log("you have no items on your list!");
-    } else {
-      for (var i = 0; i < this.todos.length; i++) {
-        var item = this.todos[i];
-        if(item.completed) {
-          console.log("(x) ", item.todoText);
-        } else {
-          console.log("( ) ", item.todoText);
-        }
-      }
-    }
-  },
+ 
   addTodo: function(itemText) {
     this.todos.push({
       todoText: itemText,
       completed: false
     });
-    this.displayTodos();
-  }, 
+  },  
   changeTodo: function(num, newTodo) {
     if(this.todos[num]){
       this.todos[num].todoText = newTodo;
-      this.displayTodos();
     }else {
       console.log(num + "is an invalid number in your to do list.");
     }
@@ -33,20 +18,12 @@ var todoList = {
   deleteTodo: function(position) {
     if(this.todos[position]) {
       this.todos.splice(position, 1);
-      this.displayTodos();
     } else {
       console.log(position + " is not on the list");
     }
   },
   toggleCompleted: function(num) {
-    if(this.todos.length === 0) {
-      console.log("you have no todos");
-    } else if (this.todos[num]){
-      this.todos[num].completed = !this.todos[num].completed;
-      this.displayTodos();
-    } else {
-      console.log("there was no todo at position: " + num);
-    }
+      this.todos[num].completed = !this.todos[num].completed;  
   },
   toggleAll: function() {
     var completedTodos = 0,
@@ -57,7 +34,6 @@ var todoList = {
           completedTodos++;
         }
     }
-    console.log("completed todos: ", completedTodos);
     if(completedTodos === totalTodos) {
       //toggle all to false (remove check)
       for (var j = 0; j < this.todos.length; j++) {
@@ -69,20 +45,18 @@ var todoList = {
         this.todos[k].completed = true;
       }
     }
-    this.displayTodos();
   }
   
 }; //end object
 
 var handler = {
   
-  display: function() {
-    todoList.displayTodos();
-  },
+ 
   add: function() {
     var addTextInput = document.getElementById("add-text");
     todoList.addTodo(addTextInput.value);
     addTextInput.value = "";
+    view.display();
     
   },
   change: function() {
@@ -91,24 +65,23 @@ var handler = {
     todoList.changeTodo(num.value, text.value);
     num.value = "";
     text.value = "";
+    view.display();
   },
-  delete: function() {
-    var num = document.getElementById("delete-num");
-    todoList.deleteTodo(num.value);
-    num.value = "";
+  delete: function(position) {
+    todoList.deleteTodo(position);
+    view.display();
   },
   toggleAll: function() {
     todoList.toggleAll();
+    view.display();
   },
-  toggleCompleted: function() {
-    var num = document.getElementById("completed-num");
-    todoList.toggleCompleted(num.value);
-    num.value = "";
+  toggleCompleted: function(id) {
+    todoList.toggleCompleted(id);
+    view.display();
   }
 };
 
-//note to self - need to work out how I will add the checkbox feature.
-//will I use the display todos method? 
+ 
 var view = {
   display: function() {
     var ulElement = document.querySelector("ul");
@@ -123,12 +96,31 @@ var view = {
         } else {
           todoTextWithCompletion = "( ) " + todoList.todos[i].todoText;
         }
-      
+      liElement.id = i;
       liElement.textContent = todoTextWithCompletion;
+      liElement.appendChild(this.createDeleteButton());
       ulElement.appendChild(liElement);
     }
+  },
+  createDeleteButton: function () {
+    var deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.className = "delete-btn";
+    return deleteBtn;
   }
 };
+
+var todosUl = document.querySelector("ul");
+todosUl.addEventListener("click", function(event) {
+  console.log(event);
+   if(event.target.className === "delete-btn") {     
+     handler.delete(event.target.parentNode.id);
+   }
+   if(event.target.tagName === "LI"){
+     handler.toggleCompleted(event.target.id);
+   }
+  
+});
 ////remember slice deletes after the number provided, so if they want to delete 2, tell slice to delete after 1
 //function deleteTodo(position) {
 //  
