@@ -24,12 +24,12 @@ var todoList = {
   toggleAll: function() {
     var completedTodos = 0,
         totalTodos = this.todos.length;
-    //count completed todos and total todos
-    for (var i = 0; i < this.todos.length; i++) {
-        if(this.todos[i].completed) { //completed is true so count it
-          completedTodos++;
-        }
-    }
+    
+    this.todos.forEach(function(todos){
+      if(todos.completed) { //completed is true so count it
+        completedTodos++;
+      }
+    });
     if(completedTodos === totalTodos) {
       //toggle all to false (remove check)
       for (var j = 0; j < this.todos.length; j++) {
