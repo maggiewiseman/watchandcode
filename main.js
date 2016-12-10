@@ -25,21 +25,24 @@ var todoList = {
     var completedTodos = 0,
         totalTodos = this.todos.length;
     
+    //count todos that are comppleted (completed = true)
     this.todos.forEach(function(todos){
       if(todos.completed) { //completed is true so count it
         completedTodos++;
       }
     });
+    
+    //compare num completed to total num to see if need to toggle all to incomplete
+    //only occurs when all items have been checked off already
     if(completedTodos === totalTodos) {
-      //toggle all to false (remove check)
-      for (var j = 0; j < this.todos.length; j++) {
-        this.todos[j].completed = false;
-      }
+      this.todos.forEach(function(todos){
+        todos.completed = false;
+      });
     } else {
       //toggle all to true (add check)
-      for (var k = 0; k < this.todos.length; k++) {
-        this.todos[k].completed = true;
-      }
+      this.todos.forEach(function(todos) {
+        todos.completed = true;
+      });
     }
   }
   
