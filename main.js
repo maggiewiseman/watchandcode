@@ -16,11 +16,7 @@ var todoList = {
     }
   },
   deleteTodo: function(position) {
-    if(this.todos[position]) {
       this.todos.splice(position, 1);
-    } else {
-      console.log(position + " is not on the list");
-    }
   },
   toggleCompleted: function(num) {
       this.todos[num].completed = !this.todos[num].completed;  
@@ -107,29 +103,22 @@ var view = {
     deleteBtn.textContent = "Delete";
     deleteBtn.className = "delete-btn";
     return deleteBtn;
+  },
+  setUpEventListeners: function() {
+    var todosUl = document.querySelector("ul");
+    todosUl.addEventListener("click", function(event) {
+      console.log(event);
+       //check to see if item clicked was delete button or the checkbox/item
+       if(event.target.className === "delete-btn") {     
+         handler.delete(parseInt(event.target.parentNode.id));
+       }
+       if(event.target.tagName === "LI"){
+         handler.toggleCompleted(parseInt(event.target.id));
+       }
+
+    });
   }
-};
+};  //end view object
 
-var todosUl = document.querySelector("ul");
-todosUl.addEventListener("click", function(event) {
-  console.log(event);
-   if(event.target.className === "delete-btn") {     
-     handler.delete(event.target.parentNode.id);
-   }
-   if(event.target.tagName === "LI"){
-     handler.toggleCompleted(event.target.id);
-   }
-  
-});
-////remember slice deletes after the number provided, so if they want to delete 2, tell slice to delete after 1
-//function deleteTodo(position) {
-//  
-//}
-//
-//
-//displayTodos();
-//addTodo("copy tests");
-//changeTodo(1, "grade labs");
-//deleteTodo(2);
-
+view.setUpEventListeners();
 
