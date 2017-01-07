@@ -95,9 +95,23 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* ======================
+   Global styles 
+   ====================== */
+body {
+  background-color: aquamarine;
+  font-family: 'Arima Madurai', cursive;
+}
 
+div, 
+footer {
+  width: 100%;
+}
 
-
+input[attribute="text"] {
+  width: 90%;
+  float: left;
+}
 
 
 
