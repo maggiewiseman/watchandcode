@@ -196,18 +196,21 @@ p.item {
   padding: 0;
 }
 
-button.destroy {
-  margin-top: 20px;
+span.destroy {
+  margin: 20px 20px 0 0;
   float: right;
   color: lightpink;
   display: none;
+  font-size: 1em;
 }
 
-li.todo-item:hover button.destroy {
+li.todo-item:hover span.destroy {
   display: inline-block; 
+  cursor: hand;
+  cursor: pointer;
 }
 
-button.destroy:hover {
+span.destroy:hover {
   color: red;
 }
 
