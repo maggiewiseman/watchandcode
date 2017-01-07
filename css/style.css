@@ -241,21 +241,23 @@ button.destroy:hover {
   text-decoration: none;
 }
 
-#footer a:selected {
-  color: red;
-}
-
 #filters {
   display: inline;
   padding-left: 100px;
 }
 
 #filters a {
-  padding: 0 10px 10px 10px;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 51, 0.15);
+  border-radius: 3px;
 }
 #clear-completed {
   float: right;
   padding-right: 10px;
+}
+
+#clear-completed:hover {
+  text-decoration: underline;
 }
 
 /* ==== 
