@@ -179,8 +179,10 @@ li {
 
 p.item {
   height: 60px;
-  margin-top: 20px;
   float: left;
+  margin: 20px 0 0 0;
+  
+  padding: 0;
 }
 
 button.destroy {
