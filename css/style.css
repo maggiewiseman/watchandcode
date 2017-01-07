@@ -115,6 +115,7 @@ main {
   font-size: 1.2em;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   
 }
 
@@ -152,7 +153,6 @@ input[type="text"] {
    ====================== */
 #main {
   clear: both;
-  
 }
 
 label[for="toggle-all"] {
@@ -203,6 +203,9 @@ button.destroy:hover {
    footer styles 
    ====================== */
 #footer {
+  height: 60px;
+  border-top: 1px solid rgba(0,0,51, .1);
+  padding-top: 20px;
   text-align: left;
   clear: both;
   
@@ -217,20 +220,33 @@ button.destroy:hover {
 
 #footer p,
 #footer a {
-
+  padding-top: 5px;
   color: rgba(0, 0, 51, .75)
 }
 
 #footer a {
   font-size: 0.75em;
   text-decoration: none;
-  padding: 0 20px 0 20px;
-  
-  
 }
 
-#footer #clear-completed {
+#filters {
+  display: inline;
+  padding-left: 100px;
+}
+
+#filters a {
+  padding: 0 10px 20px 10px;
+}
+#clear-completed {
   float: right;
+  padding-right: 10px;
+}
+
+/* ==== 
+   delete these styles after bottom no longer needed 
+   ====== */
+#spacer {
+  height: 75px;
 }
 
 
