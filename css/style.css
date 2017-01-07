@@ -110,6 +110,7 @@ body{
 
 main {
   width: 100%;
+  margin-top: 40px;
   background-color: #fff;
   text-align: center;
   font-size: 1.2em;
@@ -130,10 +131,11 @@ main {
   background-color: #fbfbb6;
   font-size: 5em;
   margin: 0;
-  color: rgba(0, 0, 51, .25)
+  color: rgba(0, 0, 51, .25);
+  border-bottom: 1px solid rgba(0,0, 51, .15);
   
 }
-input[type="checkbox"] {
+.complete-cb {
   width: 60px;
   height: 60px; 
   float: left;
@@ -141,11 +143,10 @@ input[type="checkbox"] {
 
 label[for="toggle-all"] {
   float: left;
-  width: 60px;
-  height: 60px;
   color: rgba(0,0,51, .25);
   transform: rotate(90deg);
   text-align: center;
+  padding: 20px;
   
 }
 
@@ -153,13 +154,6 @@ label[for="toggle-all"] {
   display: none;
 }
 
-#toggle-all:before + label span {
-  display: inline-block;
-  content: '❯';
-	font-size: 22px;
-	color: #e6e6e6;
-	
-}
 input[type="text"] {
   width: 87%;
   height: 60px;
@@ -221,7 +215,7 @@ button.destroy:hover {
    footer styles 
    ====================== */
 #footer {
-  height: 60px;
+  height: 40px;
   border-top: 1px solid rgba(0,0,51, .1);
   padding-top: 20px;
   text-align: left;
@@ -253,7 +247,7 @@ button.destroy:hover {
 }
 
 #filters a {
-  padding: 0 10px 20px 10px;
+  padding: 0 10px 10px 10px;
 }
 #clear-completed {
   float: right;
