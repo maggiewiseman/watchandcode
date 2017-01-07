@@ -178,7 +178,7 @@ li {
 }
 
 p.item {
-  height: 60px;
+  height: 45px;
   float: left;
   margin: 20px 0 0 0;
   padding: 0;
@@ -214,7 +214,7 @@ button.destroy:hover {
   float: left;
   display: inline;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 5px;
   font-size: .8em;
 }
 
