@@ -120,7 +120,7 @@ main {
    header styles 
    ====================== */
 #header {
-  height: 0px;
+  height: 200px;
   border-bottom: 2px solid rgba(0,0, 51, .15);
 }
 #todoapp h1 {
@@ -177,7 +177,6 @@ li {
 
 p.item {
   height: 60px;
-  font-size: 1.2em;
   margin-top: 20px;
 }
 
