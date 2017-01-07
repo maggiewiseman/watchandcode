@@ -139,6 +139,27 @@ input[type="checkbox"] {
   float: left;
 }
 
+label[for="toggle-all"] {
+  float: left;
+  width: 60px;
+  height: 60px;
+  color: rgba(0,0,51, .25);
+  transform: rotate(90deg);
+  text-align: center;
+  
+}
+
+#toggle-all {
+  display: none;
+}
+
+#toggle-all:before + label span {
+  display: inline-block;
+  content: '❯';
+	font-size: 22px;
+	color: #e6e6e6;
+	
+}
 input[type="text"] {
   width: 87%;
   height: 60px;
@@ -155,9 +176,6 @@ input[type="text"] {
   clear: both;
 }
 
-label[for="toggle-all"] {
-  display: none;
-}
 
 
 input[type="button"]:hover {
@@ -337,10 +355,14 @@ button.destroy:hover {
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
+       (-webkit-min-device-pixel-ratio: 0),
        (min-resolution: 1.25dppx),
        (min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
+         
+         #toggle-all {
+           transform: rotate(90deg);
+         }
 }
 
 /* ==========================================================================
