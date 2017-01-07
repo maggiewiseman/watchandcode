@@ -105,27 +105,27 @@ body{
   margin: 0 auto;
   max-width: 550px;
   color: #000033;
+  font-size: 16px;
 }
-
-button,
-input[type="checkbox"] {
-  outline: none;
-}
-
 
 main {
   width: 100%;
-  background-color: #fbfbb6;
+  background-color: #fff;
   text-align: center;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  font-size: 1.2em;
+  
 }
 
 /* ======================
    header styles 
    ====================== */
+#header {
+  height: 0px;
+  border-bottom: 2px solid rgba(0,0, 51, .15);
+}
 #todoapp h1 {
-  font-size: 75px;
+  background-color: #fbfbb6;
+  font-size: 5em;
   margin: 0;
   color: rgba(0, 0, 51, .25)
   
@@ -137,9 +137,12 @@ input[type="checkbox"] {
 }
 
 input[type="text"] {
-  width: 88%;
+  width: 87%;
   height: 60px;
   float: left;
+  padding: 2px;
+  border: none;
+  
 }
 
 /* ======================
@@ -170,15 +173,27 @@ li {
   width: 100%;
   height: 40px;
   text-align: left;
-
 }
 
-.item {
+p.item {
   height: 60px;
+  font-size: 1.2em;
+  margin-top: 20px;
 }
 
 button.destroy {
+  margin-top: 20px;
   float: right;
+  color: lightpink;
+  display: none;
+}
+
+li.todo-item:hover button.destroy {
+  display: inline-block; 
+}
+
+button.destroy:hover {
+  color: red;
 }
 
 /* ======================
@@ -187,6 +202,8 @@ button.destroy {
 #footer {
   text-align: left;
   clear: both;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 p {
   float: left;
