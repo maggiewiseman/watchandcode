@@ -1,5 +1,7 @@
 /* jshint devel: true, browser: true */
+'use strict';
 var todoList = {
+  
   todos: [],
  
   addTodo: function(itemText) {
@@ -107,7 +109,7 @@ var view = {
       ulElement.appendChild(liElement);
     }, this);
   },
-  createDeleteButton: function () {
+  createDeleteButton: function() {
     var deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.className = "delete-btn";
