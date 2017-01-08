@@ -303,6 +303,13 @@ span.destroy:hover {
 
 #filters a {
   padding: 0 10px;
+}
+
+#filters a:hover {
+  border: 1px solid rgba(0, 0, 51, 0.15);
+  border-radius: 3px;
+}
+#filters a.selected {
   border: 1px solid rgba(0, 0, 51, 0.15);
   border-radius: 3px;
 }
