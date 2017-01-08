@@ -87,14 +87,10 @@ var handler = {
       }
     }
   },
-  delete: function(id) {
-//    if(e.target === "span.destroy.fa.fa-times"){
-//      var id = $(e.target).closest('LI').attr('id');
-//      
+  delete: function(id) {     
       var position = this.getIndexOfEl(id);
       todoList.deleteTodo(position);
       view.render();
-//    }
   },
   toggleAll: function() {
     todoList.toggleAll();
