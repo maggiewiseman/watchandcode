@@ -7,6 +7,7 @@ var todoList = {
   init: function() {
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
+    view.bindEvents();
   },
  
   addTodo: function(itemText) {
@@ -60,9 +61,8 @@ var handler = {
   
  
   add: function() {
-   
-    todoList.addTodo($("#add-text").val());
-    $("add-text").val = "";
+    todoList.addTodo($('#new-todo').val());
+    $("#new-todo").val('');
     view.render();
     
   },
@@ -135,6 +135,9 @@ var view = {
 
     });
   },
+  bindEvents: function() {
+    $('#new-todo').on('focusout', handler.add());
+  },
   //view should take in the todos array
   //it should filter according to a filter property and return right list of todos
   //I need a template
@@ -143,10 +146,33 @@ var view = {
   render: function() {
     var htmlList = todoList.htmlTemplate(todoList.todos);
     $('#todo-list').html(htmlList);
-    
+    $('#new-todo').focus();
   }
 };  //end view object
 
+var util = {
+		uuid: function () {
+			/*jshint bitwise:false */
+			var i, random;
+			var uuid = '';
+
+			for (i = 0; i < 32; i++) {
+				random = Math.random() * 16 | 0;
+				if (i === 8 || i === 12 || i === 16 || i === 20) {
+					uuid += '-';
+				}
+				uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16);
+			}
+
+			return uuid;
+		},
+    pluralize: function() {
+      
+    },
+    store: function() {
+      
+    }
+}; //end util object
 
 todoList.init();
 
