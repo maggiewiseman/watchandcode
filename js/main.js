@@ -3,6 +3,11 @@
 var todoList = {
   
   todos: [],
+  
+  init: function() {
+    var templateString = $('#todo-list-hbt').html();
+    this.htmlTemplate = Handlebars.compile(templateString); 
+  },
  
   addTodo: function(itemText) {
     this.todos.push({
@@ -58,7 +63,7 @@ var handler = {
    
     todoList.addTodo($("#add-text").val());
     $("add-text").val = "";
-    view.display();
+    view.render();
     
   },
   change: function() {
@@ -129,8 +134,21 @@ var view = {
        }
 
     });
+  },
+  //view should take in the todos array
+  //it should filter according to a filter property and return right list of todos
+  //I need a template
+  //compile a template
+  //pass todos array to compiled template function
+  render: function() {
+    var htmlList = todoList.htmlTemplate(todoList.todos);
+    $('#todo-list').html(htmlList);
+    
   }
 };  //end view object
+
+
+todoList.init();
 
 view.setUpEventListeners();
 
