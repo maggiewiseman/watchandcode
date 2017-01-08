@@ -201,6 +201,7 @@ input[type="checkbox"] {
 .container span.complete-cb:hover {
   cursor: pointer;
 }
+/*
 .container span.complete-cb::before {
   width: 40px;
   height: 40px;
@@ -213,12 +214,12 @@ input[type="checkbox"] {
   
 }
 /* yellow circle*/
-.container span.complete-cb:hover::before {
+/*.container span.complete-cb:hover::before {
   border: 3px solid #fbfbb6;
 }
 
 
-.container span.complete-cb::after {
+.container span.complete-cb .marked-complete  {
   content: '\f00c';
   font-family: 'FontAwesome';
   left: 13px;
@@ -231,7 +232,7 @@ input[type="checkbox"]:checked + label span.complete-cb::after {
   color: #62AFFF;
 }
 
-
+*/
 ul {
   padding: 0;
   margin: 0;
@@ -251,7 +252,11 @@ li {
   float: left;
   margin: 20px 0 0 0;
   padding: 0;
-  
+}
+
+.item.completed-item {
+  text-decoration: line-through;
+  color: rgba(0,0,51, .2);
 }
 
 span.destroy {

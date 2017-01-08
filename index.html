@@ -105,7 +105,7 @@
               <input type="checkbox"  id="checkbox-{{id}}">
               <label for="checkbox-{{id}}"><span class="fa fa-check complete-cb"></span></label>
             </div>
-            <p class="item">{{todoText}}</p>  
+            <p class="item {{#if completed}} completed-item{{/if}}">{{todoText}}</p>  
             <span class="destroy fa fa-times"></span>
             
           </li> 

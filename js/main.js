@@ -11,7 +11,7 @@ var todoList = {
   init: function() {
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
-    view.bindEvents();
+    view.setUpEventListeners();
   },
  
   addTodo: function(itemText) {
@@ -78,7 +78,7 @@ var handler = {
     todoList.changeTodo(num.value, text.value);
     num.value = "";
     text.value = "";
-    view.display();
+    view.render();
   },
   getIndexOfEl: function(id) {
     for(var i = 0; i < todoList.todos.length; i++) {
@@ -94,16 +94,21 @@ var handler = {
   },
   toggleAll: function() {
     todoList.toggleAll();
-    view.display();
+    view.render();
   },
-  toggleCompleted: function(id) {
-    todoList.toggleCompleted(id);
-    view.display();
+  toggleCompleted: function(event) {
+//    var item = $(event.target.parentElement.nextElementSibling); 
+//    item.toggleClass("completed-item");
+    var id = event.target.id.substring(9,45);
+    var index = this.getIndexOfEl(id);
+    todoList.toggleCompleted(index);
+    view.render();
   }
 };
 
  
 var view = {
+
   display: function() {
     var ulElement = document.querySelector("ul");
     // clear out ul before the for loop runs so that the this run replaces rather than appends old run
@@ -129,6 +134,7 @@ var view = {
     }, this);
   },
   setUpEventListeners: function() {
+    $('#new-todo').on('keyup', handler.add);
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
       console.log(event);
@@ -137,21 +143,12 @@ var view = {
          handler.delete(event.target.parentNode.id);
        }
        //Case 2: Was li text clicked? 
-       if(event.target.tagName === "LI"){
-         handler.toggleCompleted(parseInt(event.target.id));
+       if(event.target.type === "checkbox"){
+        handler.toggleCompleted(event);
        }
 
     });
   },
-  bindEvents: function() {
-    $('#new-todo').on('keyup', handler.add);
-    //$('span.destroy').on('click', handler.delete);
-  },
-  //view should take in the todos array
-  //it should filter according to a filter property and return right list of todos
-  //I need a template
-  //compile a template
-  //pass todos array to compiled template function
   render: function() {
     var htmlList = todoList.htmlTemplate(todoList.todos);
     $('#todo-list').html(htmlList);
@@ -184,5 +181,4 @@ var util = {
 }; //end util object
 
 todoList.init();
-view.setUpEventListeners();
 
