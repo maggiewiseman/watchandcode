@@ -84,10 +84,7 @@
     <div id="spacer">
       
     </div>
-    <div>
-      <button onclick="handler.add()">Add</button>
-      <input type="text" id="add-text" placeholder="type change here"/>
-    </div>
+  
     
     <div>
       <button onclick="handler.change()">Change</button>
@@ -105,12 +102,12 @@
           {{#this}}
           <li class="todo-item toggle" id="{{id}}">
            <div class="container">
-              <input type="checkbox"  id="checkbox1">
-              <label for="checkbox1"><span class="fa fa-check complete-cb"></span></label>
+              <input type="checkbox"  id="checkbox-{{id}}">
+              <label for="checkbox-{{id}}"><span class="fa fa-check complete-cb"></span></label>
             </div>
-            <p class="item">{{todoText}}
-              </p>
+            <p class="item">{{todoText}}</p>  
             <span class="destroy fa fa-times"></span>
+            
           </li> 
           {{/this}}
     </script>
