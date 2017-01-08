@@ -245,7 +245,7 @@ span.destroy {
   float: right;
   color: lightpink;
   display: none;
-  font-size: 1em;
+  font-size: 1.4em;
 }
 
 li.todo-item:hover span.destroy {
@@ -255,7 +255,7 @@ li.todo-item:hover span.destroy {
 }
 
 span.destroy:hover {
-  color: red;
+  color: #ff4d94;
 }
 
 /* ======================
