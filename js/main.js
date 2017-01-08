@@ -128,12 +128,6 @@ var view = {
       ulElement.appendChild(liElement);
     }, this);
   },
-  createDeleteButton: function() {
-    var deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.className = "delete-btn";
-    return deleteBtn;
-  },
   setUpEventListeners: function() {
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
