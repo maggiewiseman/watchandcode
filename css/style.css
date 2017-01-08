@@ -124,19 +124,16 @@ main {
    ====================== */
 #header {
   height: 200px;
-  border-bottom: 2px solid rgba(0, 0, 51, .15);
-  
+  border-bottom: 2px solid rgba(0, 0, 51, .15); 
 }
+
 #todoapp h1 {
   background-color: #fbfbb6;
   font-size: 5em;
   margin: 0;
   color: rgba(0, 0, 51, .45);
-  border-bottom: 1px solid rgba(0,0, 51, .15);
-  
+  border-bottom: 1px solid rgba(0,0, 51, .15);  
 }
-
-
 
 label[for="toggle-all"] {
   float: left;
@@ -144,13 +141,17 @@ label[for="toggle-all"] {
   transform: rotate(90deg);
   text-align: center;
   padding: 20px;
-  
 }
 
 label[for="toggle-all"]:hover {
   cursor: pointer;
   color: #62AFFF;
 }
+
+#toggle-all:checked + label[for="toggle-all"] {
+  color: #62AFFF;
+}
+
 
 #toggle-all {
   display: none;
@@ -162,8 +163,7 @@ input[type="text"] {
   float: left;
   padding: 2px;
   border: none;
-  text-indent: .25em;
-  
+  text-indent: .25em; 
 }
 
 /* ======================
@@ -211,8 +211,8 @@ input[type="checkbox"] {
   box-sizing: border-box;
   border: 3px solid rgba(0, 0, 51, .15);
   border-radius: 50%;
-  
 }
+
 /* yellow circle*/
 .container span.complete-cb:hover::before {
   border: 3px solid #fbfbb6;
