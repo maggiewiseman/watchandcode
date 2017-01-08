@@ -55,9 +55,9 @@ var handler = {
   
  
   add: function() {
-    var addTextInput = document.getElementById("add-text");
-    todoList.addTodo(addTextInput.value);
-    addTextInput.value = "";
+   
+    todoList.addTodo($("#add-text").val());
+    $("add-text").val = "";
     view.display();
     
   },
