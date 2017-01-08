@@ -1,5 +1,9 @@
 /* jshint devel: true, browser: true */
 'use strict';
+
+const ENTER_KEY = 13;
+const ESCAPE_KEY = 27;
+
 var todoList = {
   
   todos: [],
@@ -12,6 +16,7 @@ var todoList = {
  
   addTodo: function(itemText) {
     this.todos.push({
+      id: util.uuid(),
       todoText: itemText,
       completed: false
     });
@@ -60,11 +65,12 @@ var todoList = {
 var handler = {
   
  
-  add: function() {
-    todoList.addTodo($('#new-todo').val());
-    $("#new-todo").val('');
-    view.render();
-    
+  add: function(e) {
+    if(e.which === ENTER_KEY){
+      todoList.addTodo($('#new-todo').val().trim());
+      $("#new-todo").val('');
+      view.render();
+    }
   },
   change: function() {
     var num = document.getElementById("change-num"),
@@ -74,9 +80,21 @@ var handler = {
     text.value = "";
     view.display();
   },
-  delete: function(position) {
-    todoList.deleteTodo(position);
-    view.display();
+  getIndexOfEl: function(id) {
+    for(var i = 0; i < todoList.todos.length; i++) {
+      if(todoList.todos[i].id === id) {
+        return i;
+      }
+    }
+  },
+  delete: function(id) {
+//    if(e.target === "span.destroy.fa.fa-times"){
+//      var id = $(e.target).closest('LI').attr('id');
+//      
+      var position = this.getIndexOfEl(id);
+      todoList.deleteTodo(position);
+      view.render();
+//    }
   },
   toggleAll: function() {
     todoList.toggleAll();
@@ -125,8 +143,8 @@ var view = {
     todosUl.addEventListener("click", function(event) {
       console.log(event);
        //Case 1: Was delete button clicked?
-       if(event.target.className === "delete-btn") {     
-         handler.delete(parseInt(event.target.parentNode.id));
+       if(event.target.className.indexOf("destroy") != -1) {     
+         handler.delete(event.target.parentNode.id);
        }
        //Case 2: Was li text clicked? 
        if(event.target.tagName === "LI"){
@@ -136,7 +154,8 @@ var view = {
     });
   },
   bindEvents: function() {
-    $('#new-todo').on('focusout', handler.add());
+    $('#new-todo').on('keyup', handler.add);
+    //$('span.destroy').on('click', handler.delete);
   },
   //view should take in the todos array
   //it should filter according to a filter property and return right list of todos
@@ -175,6 +194,5 @@ var util = {
 }; //end util object
 
 todoList.init();
-
 view.setUpEventListeners();
 
