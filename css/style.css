@@ -135,11 +135,8 @@ main {
   border-bottom: 1px solid rgba(0,0, 51, .15);
   
 }
-.complete-cb {
-  width: 60px;
-  height: 60px; 
-  float: left;
-}
+
+
 
 label[for="toggle-all"] {
   float: left;
@@ -148,6 +145,11 @@ label[for="toggle-all"] {
   text-align: center;
   padding: 20px;
   
+}
+
+label[for="toggle-all"]:hover {
+  cursor: pointer;
+  color: #62AFFF;
 }
 
 #toggle-all {
@@ -173,6 +175,12 @@ input[type="text"] {
 
 input[type="checkbox"] {
   display: none;
+}
+
+.complete-cb {
+  width: 60px;
+  height: 60px; 
+  float: left;
 }
 
 /* container for item checkbox */
