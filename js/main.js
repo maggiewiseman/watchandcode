@@ -1,17 +1,20 @@
-/* jshint devel: true, browser: true */
+/* jshint devel: true, browser: true, jquery: true */
+
 'use strict';
 
-const ENTER_KEY = 13;
-const ESCAPE_KEY = 27;
+var ENTER_KEY = 13;
+var ESCAPE_KEY = 27;
 
 var todoList = {
   
   todos: [],
+  completed: false,
   
   init: function() {
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
     view.setUpEventListeners();
+    this.filter = "all";
   },
  
   addTodo: function(itemText) {
@@ -36,29 +39,34 @@ var todoList = {
       this.todos[num].completed = !this.todos[num].completed;  
   },
   toggleAll: function() {
-    var completedTodos = 0,
-        totalTodos = this.todos.length;
-    
-
-    this.todos.forEach(function(todos){
-      //Case 1: Is this todo complete? If yes, count it
-      if(todos.completed) { 
-        completedTodos++;
-      }
-    });
-    
-    //Case 1: Are ALL of the todos complete? If yes, set todo.complete to false
-    if(completedTodos === totalTodos) {
-      this.todos.forEach(function(todos){
-        todos.completed = false;
-      });
-    //Case 2: At least 1 todo is incomplete, set all todo.complete to true  
-    } else {
-      this.todos.forEach(function(todos) {
-        todos.completed = true;
-      });
+    this.completed = !this.completed;
+    for(var i = 0; i < this.todos.length; i++) {
+      this.todos[i].completed = this.completed;
     }
-  }
+    
+//    var completedTodos = 0,
+//        totalTodos = this.todos.length;
+//    
+//
+//    this.todos.forEach(function(todos){
+//      //Case 1: Is this todo complete? If yes, count it
+//      if(todos.completed) { 
+//        completedTodos++;
+//      }
+//    });
+//    
+//    //Case 1: Are ALL of the todos complete? If yes, set todo.complete to false
+//    if(completedTodos === totalTodos) {
+//      this.todos.forEach(function(todos){
+//        todos.completed = false;
+//      });
+//    //Case 2: At least 1 todo is incomplete, set all todo.complete to true  
+//    } else {
+//      this.todos.forEach(function(todos) {
+//        todos.completed = true;
+//      });
+//    }
+  } //end toggle all
   
 }; //end object
 
@@ -135,6 +143,7 @@ var view = {
   },
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
+    $('#toggle-all').on('click', handler.toggleAll);
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
       console.log(event);
@@ -150,6 +159,9 @@ var view = {
     });
   },
   render: function() {
+    if(todoList.completed) {
+      $('#toggle-all').attr('checked', true);
+    }
     var htmlList = todoList.htmlTemplate(todoList.todos);
     $('#todo-list').html(htmlList);
     $('#new-todo').focus();

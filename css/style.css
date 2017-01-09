@@ -145,13 +145,12 @@ label[for="toggle-all"] {
 
 label[for="toggle-all"]:hover {
   cursor: pointer;
-  color: #62AFFF;
+  color: #fbfbb6;
 }
 
 #toggle-all:checked + label[for="toggle-all"] {
   color: #62AFFF;
 }
-
 
 #toggle-all {
   display: none;
