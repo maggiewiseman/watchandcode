@@ -36,7 +36,10 @@ var todoList = {
       this.todos.splice(position, 1);
   },
   toggleCompleted: function(num) {
-      this.todos[num].completed = !this.todos[num].completed;  
+      this.todos[num].completed = !this.todos[num].completed; 
+    //check to see if all todos are already complete
+    //need to build filterTodos then check to see of active todos is 0 and completed todos >0
+    
   },
   toggleAll: function() {
     this.completed = !this.completed;
@@ -66,7 +69,26 @@ var todoList = {
 //        todos.completed = true;
 //      });
 //    }
-  } //end toggle all
+  }, //end toggle all
+  getFilteredTodos: function(filter) {
+    if(filter === 'all'){
+      return this.todos;
+    }
+    if(filter === 'active') {
+      return getActiveTodos();
+    }
+    if(filter === 'completed') {
+      return getCompletedTodos();
+    }
+  },
+  getActiveTodos: function() {
+  
+    this.todos.filter(function(item){
+      if(!item.completed) {
+        return item;
+      } 
+    });
+  }
   
 }; //end object
 
