@@ -15,6 +15,7 @@ var todoList = {
     this.htmlTemplate = Handlebars.compile(templateString); 
     view.setUpEventListeners();
     this.filter = "all";
+    handler.setUpRouter();
   },
  
   addTodo: function(itemText) {
@@ -50,7 +51,6 @@ var todoList = {
 //    var completedTodos = 0,
 //        totalTodos = this.todos.length;
 //    
-//
 //    this.todos.forEach(function(todos){
 //      //Case 1: Is this todo complete? If yes, count it
 //      if(todos.completed) { 
@@ -70,23 +70,29 @@ var todoList = {
 //      });
 //    }
   }, //end toggle all
-  getFilteredTodos: function(filter) {
-    if(filter === 'all'){
+  getFilteredTodos: function() {
+    if(this.filter === 'all'){
       return this.todos;
     }
-    if(filter === 'active') {
-      return getActiveTodos();
+    if(this.filter === 'active') {
+      return this.getActiveTodos();
     }
-    if(filter === 'completed') {
-      return getCompletedTodos();
+    if(this.filter === 'completed') {
+      return this.getCompletedTodos();
     }
   },
   getActiveTodos: function() {
-  
-    this.todos.filter(function(item){
+    return this.todos.filter(function(item){
       if(!item.completed) {
         return item;
       } 
+    });
+  },
+  getCompletedTodos: function() {
+    return this.todos.filter(function(item) {
+      if(item.completed) {
+        return item;
+      }
     });
   }
   
@@ -127,45 +133,41 @@ var handler = {
     view.render();
   },
   toggleCompleted: function(event) {
-//    var item = $(event.target.parentElement.nextElementSibling); 
-//    item.toggleClass("completed-item");
     var id = event.target.id.substring(9,45);
     var index = this.getIndexOfEl(id);
     todoList.toggleCompleted(index);
     view.render();
+  },
+  routes: {
+    '/all': function(){
+      console.log('routed to all!');
+      todoList.filter = 'all';
+      view.render();
+    },
+    '/active': function(){
+      console.log('routed to active!');
+      todoList.filter = 'active';
+      view.render();
+    },
+    '/completed': function(){
+      console.log('routed to completed!');
+      todoList.filter = 'completed';
+      view.render();
+    },
+    //'/clear': todoList.deleteCompleted;
+  },
+  setUpRouter: function(){
+    var router = Router(this.routes);
+    router.init();
   }
 };
 
  
 var view = {
-
-  display: function() {
-    var ulElement = document.querySelector("ul");
-    // clear out ul before the for loop runs so that the this run replaces rather than appends old run
-    ulElement.innerHTML = "";
-    
-    todoList.todos.forEach(function(todo, position){
-      var liElement = document.createElement("li");
-      
-      //string that will hold the text to be added to the li and displayed
-      var todoTextWithCompletion = '';
-     
-      //Case 1: Is the todo completed? (todo.complete = true)
-      if(todo.completed) {
-          todoTextWithCompletion = "(x) " + todo.todoText;
-      //Case 2: Todo is not completed
-      } else {
-        todoTextWithCompletion = "( ) " + todo.todoText;
-      }
-      liElement.id = position;
-      liElement.textContent = todoTextWithCompletion;
-      liElement.appendChild(this.createDeleteButton());
-      ulElement.appendChild(liElement);
-    }, this);
-  },
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('click', handler.toggleAll);
+    
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
       console.log(event);
@@ -177,14 +179,23 @@ var view = {
        if(event.target.type === "checkbox"){
         handler.toggleCompleted(event);
        }
-
     });
   },
   render: function() {
+    var filteredList = todoList.getFilteredTodos();
+     
+    //need to check to see if toggle-all should be checked based on completed property of todo list which is set to true if there no active todos, but at least one completed todo.
+    //the toggle-all element is not in the handlebars template so it doesn't get re-rendered each time render is called unless I do it here.
+    if(todoList.getActiveTodos().length < 1 && todoList.getCompletedTodos().length > 0) {
+      todoList.completed = true;
+    }
+    
     if(todoList.completed) {
       $('#toggle-all').attr('checked', true);
     }
-    var htmlList = todoList.htmlTemplate(todoList.todos);
+    
+    //handlebars templating:
+    var htmlList = todoList.htmlTemplate(filteredList);
     $('#todo-list').html(htmlList);
     $('#new-todo').focus();
   }
