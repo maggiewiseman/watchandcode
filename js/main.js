@@ -9,7 +9,6 @@ var todoList = {
   
   todos: [],
   completed: false,
-  
   init: function() {
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
@@ -42,11 +41,16 @@ var todoList = {
     //need to build filterTodos then check to see of active todos is 0 and completed todos >0
     
   },
-  toggleAll: function() {
-    this.completed = !this.completed;
-    for(var i = 0; i < this.todos.length; i++) {
-      this.todos[i].completed = this.completed;
-    }
+  toggleAll: function(e) {
+    var isChecked = $(e.target).prop('checked');
+    todoList.todos.forEach(function(item){
+      item.completed = isChecked;
+    });
+
+//  
+//    for(var i = 0; i < this.todos.length; i++) {
+//      this.todos[i].completed = this.completed;
+//    }
     
 //    var completedTodos = 0,
 //        totalTodos = this.todos.length;
@@ -70,6 +74,19 @@ var todoList = {
 //      });
 //    }
   }, //end toggle all
+//  getShowToggleAll: function() {
+//    
+//    //checking to see if there are no active todos but at least one completed. In this case, there is a list, but it's all done
+//    if(this.getActiveTodos().length === 0 && this.getCompletedTodos().length > 0) {
+//       //set completed to true
+//        this.completed = true;
+//       return true;
+//    }
+//    else {
+//      this.completed = true;
+//    }
+//    return this.completed;
+//  },
   getFilteredTodos: function() {
     if(this.filter === 'all'){
       return this.todos;
@@ -128,8 +145,8 @@ var handler = {
       todoList.deleteTodo(position);
       view.render();
   },
-  toggleAll: function() {
-    todoList.toggleAll();
+  toggleAll: function(e) {
+    todoList.toggleAll(e);
     view.render();
   },
   toggleCompleted: function(event) {
@@ -166,7 +183,7 @@ var handler = {
 var view = {
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
-    $('#toggle-all').on('click', handler.toggleAll);
+    $('#toggle-all').on('change', handler.toggleAll);
     
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
@@ -185,14 +202,11 @@ var view = {
     var filteredList = todoList.getFilteredTodos();
      
     //need to check to see if toggle-all should be checked based on completed property of todo list which is set to true if there no active todos, but at least one completed todo.
-    //the toggle-all element is not in the handlebars template so it doesn't get re-rendered each time render is called unless I do it here.
-    if(todoList.getActiveTodos().length < 1 && todoList.getCompletedTodos().length > 0) {
-      todoList.completed = true;
-    }
+    $('#toggle-all').prop('checked', todoList.getActiveTodos().length === 0);
     
-    if(todoList.completed) {
-      $('#toggle-all').attr('checked', true);
-    }
+    //don't show toggle-all button if theres' no todos
+    $('label[for="toggle-all"]').toggle(todoList.todos.length != 0);
+    
     
     //handlebars templating:
     var htmlList = todoList.htmlTemplate(filteredList);

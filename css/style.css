@@ -157,7 +157,7 @@ label[for="toggle-all"]:hover {
 }
 
 input[type="text"] {
-  width: 87%;
+  width: 80%;
   height: 60px;
   float: left;
   padding: 2px;
