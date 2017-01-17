@@ -23,6 +23,7 @@ var todoList = {
       todoText: itemText,
       completed: false
     });
+    util.store("todos", this.todos);
   },  
   changeTodo: function(num, newTodo) {
     
@@ -205,7 +206,7 @@ var view = {
     $('#toggle-all').prop('checked', todoList.getActiveTodos().length === 0);
     
     //don't show toggle-all button if theres' no todos
-    $('label[for="toggle-all"]').toggle(todoList.todos.length != 0);
+    $('label[for="toggle-all"]').toggle(todoList.todos.length !== 0);
     
     
     //handlebars templating:
@@ -234,9 +235,15 @@ var util = {
     pluralize: function() {
       
     },
-    store: function() {
+    store: function(name, data) {
+      if(arguments > 1) {
+        return localStorage.setItem(name, JSON.stringify(data));
+      } else {
+        var storedList =localStorage.getItem(name);
+        return (storedList && JSON.parse(storedList)) || [];
+      }
       
-    }
+   }
 }; //end util object
 
 todoList.init();

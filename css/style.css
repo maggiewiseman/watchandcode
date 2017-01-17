@@ -101,7 +101,7 @@ textarea {
 html,
 body{
   background-color: #fbfbb6;
-  font-family: 'Arima Madurai', cursive;
+  font-family: 'Arima Madurai', 'Arial';
   margin: 0 auto;
   max-width: 550px;
   color: rgba(0, 0, 51, .65);
