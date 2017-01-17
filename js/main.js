@@ -7,13 +7,14 @@ var ESCAPE_KEY = 27;
 
 var todoList = {
   
-  todos: [],
+  
   completed: false,
   init: function() {
+    this.todos = util.store('todos');
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
     view.setUpEventListeners();
-    this.filter = "all";
+    this.filter = "/all";
     handler.setUpRouter();
   },
  
@@ -23,7 +24,7 @@ var todoList = {
       todoText: itemText,
       completed: false
     });
-    util.store("todos", this.todos);
+    
   },  
   changeTodo: function(num, newTodo) {
     
@@ -213,6 +214,7 @@ var view = {
     var htmlList = todoList.htmlTemplate(filteredList);
     $('#todo-list').html(htmlList);
     $('#new-todo').focus();
+    util.store("todos", todoList.todos);
   }
 };  //end view object
 
@@ -236,7 +238,7 @@ var util = {
       
     },
     store: function(name, data) {
-      if(arguments > 1) {
+      if(arguments.length > 1) {  
         return localStorage.setItem(name, JSON.stringify(data));
       } else {
         var storedList =localStorage.getItem(name);
