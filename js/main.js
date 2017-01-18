@@ -177,7 +177,7 @@ var handler = {
   },
   setUpRouter: function(){
     var router = Router(this.routes);
-    router.init();
+    router.init('/all');
   }
 };
 
@@ -241,7 +241,7 @@ var util = {
       if(arguments.length > 1) {  
         return localStorage.setItem(name, JSON.stringify(data));
       } else {
-        var storedList =localStorage.getItem(name);
+        var storedList = localStorage.getItem(name);
         return (storedList && JSON.parse(storedList)) || [];
       }
       
