@@ -157,6 +157,10 @@ var handler = {
     todoList.toggleCompleted(index);
     view.render();
   },
+  clearCompleted: function() {
+    todoList.todos = todoList.getActiveTodos();
+    view.render();
+  },
   routes: {
     '/all': function(){
       console.log('routed to all!');
@@ -186,6 +190,7 @@ var view = {
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('change', handler.toggleAll);
+    $('#clear-completed').on('click', handler.clearCompleted());
     
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
