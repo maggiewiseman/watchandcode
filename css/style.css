@@ -165,6 +165,12 @@ input[type="text"] {
   text-indent: .25em; 
 }
 
+#new-todo {
+  outline: none;
+}
+
+
+
 /* ======================
    todo list styles 
    ====================== */
