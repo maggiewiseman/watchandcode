@@ -173,6 +173,7 @@ var view = {
     
     //don't show toggle-all button if theres' no todos
     $('label[for="toggle-all"]').toggle(todoList.todos.length !== 0);
+		$('#footer').toggle(todoList.todos.length !== 0);
     
     
     //handlebars templating:
