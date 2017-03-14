@@ -6,8 +6,7 @@ var ENTER_KEY = 13;
 var ESCAPE_KEY = 27;
 
 var todoList = {
-  
-  
+
   completed: false,
   init: function() {
     this.todos = util.store('todos');
@@ -49,46 +48,8 @@ var todoList = {
       item.completed = isChecked;
     });
 
-//  
-//    for(var i = 0; i < this.todos.length; i++) {
-//      this.todos[i].completed = this.completed;
-//    }
-    
-//    var completedTodos = 0,
-//        totalTodos = this.todos.length;
-//    
-//    this.todos.forEach(function(todos){
-//      //Case 1: Is this todo complete? If yes, count it
-//      if(todos.completed) { 
-//        completedTodos++;
-//      }
-//    });
-//    
-//    //Case 1: Are ALL of the todos complete? If yes, set todo.complete to false
-//    if(completedTodos === totalTodos) {
-//      this.todos.forEach(function(todos){
-//        todos.completed = false;
-//      });
-//    //Case 2: At least 1 todo is incomplete, set all todo.complete to true  
-//    } else {
-//      this.todos.forEach(function(todos) {
-//        todos.completed = true;
-//      });
-//    }
   }, //end toggle all
-//  getShowToggleAll: function() {
-//    
-//    //checking to see if there are no active todos but at least one completed. In this case, there is a list, but it's all done
-//    if(this.getActiveTodos().length === 0 && this.getCompletedTodos().length > 0) {
-//       //set completed to true
-//        this.completed = true;
-//       return true;
-//    }
-//    else {
-//      this.completed = true;
-//    }
-//    return this.completed;
-//  },
+
   getFilteredTodos: function() {
     if(this.filter === 'all'){
       return this.todos;
@@ -118,8 +79,6 @@ var todoList = {
 }; //end object
 
 var handler = {
-  
- 
   add: function(e) {
     if(e.which === ENTER_KEY){
       todoList.addTodo($('#new-todo').val().trim());
@@ -247,6 +206,7 @@ var util = {
         return localStorage.setItem(name, JSON.stringify(data));
       } else {
         var storedList = localStorage.getItem(name);
+				//if first arguement in OR is true, it returns that data, not just the value: true.
         return (storedList && JSON.parse(storedList)) || [];
       }
       
