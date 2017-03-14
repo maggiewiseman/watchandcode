@@ -7,9 +7,10 @@ var ESCAPE_KEY = 27;
 
 var todoList = {
 
-  completed: false,
+  //completed: false,
   init: function() {
     this.todos = util.store('todos');
+		//gets script from index.html and turns it into a string.
     var templateString = $('#todo-list-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
     view.setUpEventListeners();
@@ -167,7 +168,7 @@ var view = {
   render: function() {
     var filteredList = todoList.getFilteredTodos();
      
-    //need to check to see if toggle-all should be checked based on completed property of todo list which is set to true if there no active todos, but at least one completed todo.
+    //check to see if toggle-all should be checked based on whether there are any active todos. If there are no active todos, set property to checked.  
     $('#toggle-all').prop('checked', todoList.getActiveTodos().length === 0);
     
     //don't show toggle-all button if theres' no todos
@@ -179,6 +180,21 @@ var view = {
     $('#todo-list').html(htmlList);
     $('#new-todo').focus();
     util.store("todos", todoList.todos);
+		
+		//footer outlines
+		if (todoList.filter === 'all') {
+			$('#all').addClass('outline');
+			$('#active').removeClass('outline');
+			$('#completed').removeClass('outline');
+		} else if (todoList.filter === 'active') {
+			$('#all').removeClass('outline');
+			$('#active').addClass('outline');
+			$('#completed').removeClass('outline');
+		} else if (todoList.filter === 'completed') {
+			$('#all').removeClass('outline');
+			$('#active').removeClass('outline');
+			$('#completed').addClass('outline');
+		}
   }
 };  //end view object
 

@@ -343,6 +343,11 @@ span.destroy:hover {
   border: 1px solid rgba(0, 0, 51, 0.15);
   border-radius: 3px;
 }
+
+#filters a.outline {
+	border: 1px solid rgba(0, 0, 51, 0.15);
+  border-radius: 3px;
+}
 #clear-completed {
   float: right;
   padding-right: 10px;
@@ -360,11 +365,13 @@ footer {
 
 footer p {
 	font-size: 0.7em;
-	font-family: sans-serif;
-	
-	
+	font-family: sans-serif;	
 }
 
+footer a {
+	text-decoration: none;
+	color: #62AFFF;
+}
 /* ==== 
    delete these styles after bottom no longer needed 
    ====== */
