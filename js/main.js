@@ -9,6 +9,7 @@ var todoList = {
 
   //completed: false,
   init: function() {
+		console.log("init!");	
     this.todos = util.store('todos');
 		//gets script from index.html and turns it into a string.
     var templateString = $('#todo-list-hbt').html();
@@ -150,7 +151,7 @@ var view = {
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('change', handler.toggleAll);
-    $('#clear-completed').on('click', handler.clearCompleted());
+    $('#clear-completed').on('click', handler.clearCompleted);
     
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {
@@ -180,6 +181,7 @@ var view = {
     var htmlList = todoList.htmlTemplate(filteredList);
     $('#todo-list').html(htmlList);
     $('#new-todo').focus();
+		console.log("about to store ", todoList.todos);
     util.store("todos", todoList.todos);
 		
 		//footer outlines
