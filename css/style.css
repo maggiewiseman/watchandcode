@@ -212,6 +212,10 @@ ul {
 	justify-content:space-between;
 }
 
+.container {
+	margin: 0 1%;
+} 
+
 .container span.complete-cb {
   width: 40px;
   height: 40px;
@@ -224,6 +228,7 @@ ul {
   font-family: 'FontAwesome';
   font-size: 1.3em;
   color: transparent; 
+	padding: 10%
 }
 
 .container span.complete-cb:hover {
