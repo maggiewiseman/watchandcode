@@ -195,23 +195,17 @@ input[type="checkbox"] {
   display: none;
 }
 
-.complete-cb {
-  width: 60px;
-  height: 60px; 
-  float: left;
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
-/* container for item checkbox */
-.container label {
-  position: relative;
-}
-
-.container span.complete-cb {
-  position: relative;
-	content: '';
-  top: 5px;
-  left: 2px;
-  margin-right: 8px;
+#todo-list li {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content:space-between;
 }
 
 .container span.complete-cb {
@@ -225,8 +219,7 @@ input[type="checkbox"] {
 	content: '\f00c';
   font-family: 'FontAwesome';
   font-size: 1.3em;
-  color: transparent;
-  
+  color: transparent; 
 }
 
 .container span.complete-cb:hover {
@@ -236,8 +229,37 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked + label span.complete-cb {
   color: #62AFFF;
-	
 }
+
+#todo-list li p {
+	text-align: left;
+	width: 85%;
+}
+
+.item.completed-item {
+  text-decoration: line-through;
+  color: rgba(0,0,51, .2);
+}
+
+.destroy {
+	margin: 0 2% 0 0;
+  color: lightpink;
+  font-size: 1.4em;
+}
+
+.destroy:hover {
+  color: #ff4d94;
+}
+
+
+/*
+
+
+
+
+
+
+
 
 ul {
   padding: 0;
@@ -246,46 +268,32 @@ ul {
   clear: both;
 }
 
+/*
 li p {
 	float: left;
 	width: 80%;
 }
 
 li {
-  height: 40px;
   text-align: left;
   clear: both;
+	overflow:auto;
 }
 
 .item {
   height: 45px;
   float: left;
-  margin: 20px 0 0 0;
+  margin: 10px 0;
   padding: 0;
 }
 
-.item.completed-item {
-  text-decoration: line-through;
-  color: rgba(0,0,51, .2);
-}
+
 
 span.destroy {
-  margin: 20px 20px 0 0;
-  float: right;
-  color: lightpink;
-  /*display: none;*/
-  font-size: 1.4em;
+  
 }
+*/
 
-li.todo-item:hover span.destroy {
-  display: inline-block; 
-  cursor: hand;
-  cursor: pointer;
-}
-
-span.destroy:hover {
-  color: #ff4d94;
-}
 
 /* ======================
    footer styles 
