@@ -206,48 +206,37 @@ input[type="checkbox"] {
   position: relative;
 }
 
-/* Makes it so span can be centered */
-.container span.complete-cb::before,
-.container span.complete-cb::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+.container span.complete-cb {
+  position: relative;
+	content: '';
+  top: 5px;
+  left: 2px;
+  margin-right: 8px;
 }
 
-.container span.complete-cb:hover {
-  cursor: pointer;
-}
-
-.container span.complete-cb::before {
+.container span.complete-cb {
   width: 40px;
   height: 40px;
-  top: 60px;
-  left: 5px;
   background-color: #fff;
   box-sizing: border-box;
   border: 3px solid rgba(0, 0, 51, .15);
   border-radius: 50%;
-}
-
-/* yellow circle*/
-.container span.complete-cb:hover::before {
-  border: 3px solid #fbfbb6;
-}
-
-.container span.complete-cb::after  {
-  content: '\f00c';
+	
+	content: '\f00c';
   font-family: 'FontAwesome';
-  left: 13px;
-  top: 18px;
   font-size: 1.3em;
   color: transparent;
-  transition: color .2s;
+  
 }
 
-input[type="checkbox"]:checked + label span.complete-cb::after {
+.container span.complete-cb:hover {
+  cursor: pointer;
+	border: 3px solid #fbfbb6;
+}
+
+input[type="checkbox"]:checked + label span.complete-cb {
   color: #62AFFF;
+	
 }
 
 ul {
@@ -257,10 +246,14 @@ ul {
   clear: both;
 }
 
+li p {
+	float: left;
+	width: 80%;
+}
+
 li {
   height: 40px;
   text-align: left;
-  position: relative;
   clear: both;
 }
 
