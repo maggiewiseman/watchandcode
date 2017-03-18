@@ -88,6 +88,9 @@ var handler = {
       view.render();
     }
   },
+	edit: function() {
+		return 1;
+	},
   change: function() {
     var num = document.getElementById("change-num"),
         text = document.getElementById("change-text");
@@ -152,6 +155,7 @@ var view = {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('change', handler.toggleAll);
     $('#clear-completed').on('click', handler.clearCompleted);
+		$('.todo-item').on('dblclick', handler.edit);
     
     var todosUl = document.querySelector("ul");
     todosUl.addEventListener("click", function(event) {

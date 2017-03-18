@@ -1,0 +1,17 @@
+<script src="tinytest.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/vendor/jquery-1.12.0.min.js"></script>
+
+<script>
+tests({
+//Requirements:
+//when you double click on an li edit function is called
+	//addeventlistener that responds to dblclick and calls a function todoList.edit this function returns a 1.
+  'double click li': function() {
+    eq(1, handler.edit());
+  },
+
+ 
+
+});
+</script>
