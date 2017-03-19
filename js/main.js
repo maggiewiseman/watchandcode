@@ -92,15 +92,26 @@ var handler = {
 		console.log('in handler.edit');
 		var $input = $(e.target).closest('li').addClass('editing').find('.edit');
 		console.log($(e.target).closest('p').html());
-		$input.val($(e.target).closest('p').html());
+		$input.val($(e.target).closest('p').html()).focus();
 	},
-  change: function() {
+	keyup: function(e) {
+		if(e.which === ENTER_KEY) {
+			handler.change(e);
+		}
+		
+		if(e.which === ESCAPE_KEY) {
+			view.render();
+		}
+	},
+  change: function(e) {
 		console.log('in handler.change');
-//    var num = document.getElementById("change-num"),
-//        text = document.getElementById("change-text");
-//    todoList.changeTodo(num.value, text.value);
-//    num.value = "";
-//    text.value = "";
+		var id = $(e.target).closest('li').attr('id');
+		console.log('id: ', id);
+		
+    var num = handler.getIndexOfEl(id),
+        text = $('.editing .edit').val();
+		console.log("num: " + num + ", text is: " + text);
+    todoList.changeTodo(num, text);
     view.render();
   },
   getIndexOfEl: function(id) {
@@ -159,8 +170,9 @@ var view = {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('change', handler.toggleAll);
     $('#clear-completed').on('click', handler.clearCompleted);
-		$('#todo-list').on('dblclick', handler.edit);
-		$('.todo-item').on('blur', handler.change);
+		$('#todo-list').on('dblclick', handler.edit)
+			.on('keyup', handler.keyup)
+			.on('focusout', handler.change);
 	
     
     var todosUl = document.querySelector("ul");

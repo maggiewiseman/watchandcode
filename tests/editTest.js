@@ -1,5 +1,5 @@
 //to-do app testing.js
-casper.test.begin('Edit List Tests', 8, function suite(test) {
+casper.test.begin('Edit List Tests', 13, function suite(test) {
   
 	
   //2 test items
@@ -33,20 +33,50 @@ casper.test.begin('Edit List Tests', 8, function suite(test) {
     });
 	
 	  //EDIT TESTING
-	  // 4 test
+	  // 5 test
 	  casper.then(function() {
 			//make sure there's not item with .edit
-			test.assertDoesntExist('.editing', 'element with .editing class exists');
+			test.assertDoesntExist('.editing', 'element with .editing class dpes not exist');
 			//double click on an item which should add .editing class to an li
 			this.mouseEvent('dblclick', '.todo-item p');
 			console.log('double clicked a p item');
 			test.assertExists('.editing .edit', 'element with editing and edit class exists');
 			//make sure view is gone for that li
 			test.assertDoesntExist('.view .editing', 'view element with editing class not on page');
+			//see if the text item 1 is appearing in the input
 			test.assertSelectorHasText('li.editing .edit', 'item 1', 'item 1 text exists on page');
-//			then.fill('')
+			this.sendKeys('li.editing .edit', ' editing', true);
+			this.click('footer', 'clicked footer');
+		  test.assertTextExists('item 1 editing', 'input edited successfully');
+			this.capture('images/editedInput.png');
+	
+		});
+	
+	 //4 tests
+	casper.then(function() {
+			console.log('testing edit with return');
+			//make sure there's not item with .edit
+			test.assertDoesntExist('.editing', 'element with .editing class does not exist');
+			//double click on an item which should add .editing class to an li
+			this.mouseEvent('dblclick', '.todo-item p');
+			console.log('double clicked a p item');
+			//see if the text item 1 is appearing in the input
+			test.assertSelectorHasText('li.editing .edit', 'item 1 editing', 'item 1 editing text exists on page');
+			this.sendKeys('li.editing .edit', ' crazy stuff', {keepFocus: true});
+			this.capture('images/editedInput2.png');
+
+			this.sendKeys('li.editing .edit', casper.page.event.key.Escape);
+		  this.wait(500, function(){
+				this.capture('images/editedInput3.png');
+				test.assertTextDoesntExist('item 1 editing crazy stuff', 'input edited successfully');
+				//make sure there's not item with .edit
+				test.assertDoesntExist('.editing', 'element with .editing class does not exist');
+				this.capture('images/editedInput4.png');
+			});
+		});
+	
 //			test.assertTextExist('.')
-		})
+		
 	
 	  //remove a list item
 	  //2 tests
