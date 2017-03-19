@@ -1,5 +1,5 @@
 //to-do app testing.js
-casper.test.begin('To Do List Tests', 5, function suite(test) {
+casper.test.begin('To Do List Tests', 6, function suite(test) {
   
 	
   //2 test items
@@ -33,9 +33,14 @@ casper.test.begin('To Do List Tests', 5, function suite(test) {
     });
 	
 	  //EDIT TESTING
-	  // 1 test
+	  // 2 test
 	  casper.then(function() {
-			test.assertDoesntExist('.edit', 'element with .edit class exists');
+			//make sure there's not item with .edit
+			test.assertDoesntExist('.editing', 'element with .editing class exists');
+			//double click on an item which should add .editing class to an li
+			this.mouseEvent('dblclick', '.todo-item p');
+			console.log('double clicked a p item');
+			test.assertExists('.editing', 'element with editing class exists');
 		})
 	
 	  //remove a list item
