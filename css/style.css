@@ -260,6 +260,19 @@ input[type="checkbox"]:checked + label span.complete-cb {
   color: #ff4d94;
 }
 
+/**** Editing Styles ****/
+.edit {
+	width: 100%;
+	display: none;
+}
+
+#todo-list li.editing {
+	display: block;
+}
+#todo-list li.editing .view {
+    display: none;
+}
+
 /* ======================
    footer styles 
    ====================== */

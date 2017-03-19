@@ -74,13 +74,17 @@
     <script id="todo-list-hbt" type="text/text/x-handlebars-template">
           {{#this}}
           <li class="todo-item toggle" id="{{id}}">
+					<div class="view">
            <div class="container">
               <input type="checkbox"  id="checkbox-{{id}}" {{#if completed}}checked{{/if}}>
               <label for="checkbox-{{id}}"><span class="fa fa-check complete-cb">&nbsp;</span></label>
            </div>
+						
            <p class="item {{#if completed}} completed-item{{/if}}">{{todoText}}</p>  
            <span class="destroy fa fa-times"></span>
-            
+					</div>
+           <input class="edit" name="edit-item">
+
           </li> 
           {{/this}}
     </script>
