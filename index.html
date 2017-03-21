@@ -37,13 +37,7 @@
       <ul id="todo-list"> </ul>
     </div>
     <div id="footer">
-      <p># items left</p>
-      <div id="filters">
-        <a href="#/all" id="all">All</a>
-        <a href="#/active" id="active">Active</a>
-        <a href="#/completed" id="completed">Completed</a>
-      </div>
-      <a href="" id="clear-completed">Clear Completed</a>
+      
     </div>    
    
     <footer>
@@ -88,6 +82,18 @@
           </li> 
           {{/this}}
     </script>
+			
+		<script id="footer-hbt" type="text/text/x-handlebars-template">
+			{{#this}}
+				<p>{{numItems}} items left</p>
+				<div id="filters">
+					<a href="#/all" id="all">All</a>
+					<a href="#/active" id="active">Active</a>
+					<a href="#/completed" id="completed">Completed</a>
+				</div>
+				<a href="" id="clear-completed">Clear Completed</a>
+			{{/this}}
+		</script>
 
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>

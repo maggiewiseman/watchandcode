@@ -13,7 +13,9 @@ var todoList = {
     this.todos = util.store('todos');
 		//gets script from index.html and turns it into a string.
     var templateString = $('#todo-list-hbt').html();
+		var footerString = $('#footer-hbt').html();
     this.htmlTemplate = Handlebars.compile(templateString); 
+		this.footerTemplate = Handlebars.compile(footerString);
     view.setUpEventListeners();
     this.filter = "/all";
     handler.setUpRouter();
@@ -206,6 +208,7 @@ var view = {
 		console.log("about to store ", todoList.todos);
     util.store("todos", todoList.todos);
 		
+		this.renderFooter();
 		//footer outlines
 		if (todoList.filter === 'all') {
 			$('#all').addClass('outline');
@@ -220,7 +223,13 @@ var view = {
 			$('#active').removeClass('outline');
 			$('#completed').addClass('outline');
 		}
-  }
+  },
+	renderFooter: function() {
+		var footerInfo = [{numItems: todoList.getActiveTodos().length}]
+		var footerHtml = todoList.footerTemplate(footerInfo);
+		$('#footer').html(footerHtml);
+	}
+	
 };  //end view object
 
 var util = {
