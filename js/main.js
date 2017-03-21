@@ -139,6 +139,7 @@ var handler = {
     view.render();
   },
   clearCompleted: function() {
+		console.log('clearCompleted');
     todoList.todos = todoList.getActiveTodos();
     view.render();
   },
@@ -225,7 +226,12 @@ var view = {
 		}
   },
 	renderFooter: function() {
-		var footerInfo = [{numItems: todoList.getActiveTodos().length}]
+		var numActive = todoList.getActiveTodos().length;
+		var itemLabel = ' items';
+		if (numActive === 1){
+			itemLabel = ' item'; 
+		}
+		var footerInfo = [{numItems: numActive + itemLabel}]
 		var footerHtml = todoList.footerTemplate(footerInfo);
 		$('#footer').html(footerHtml);
 	}
