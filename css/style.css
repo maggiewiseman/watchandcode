@@ -330,7 +330,6 @@ input[type="checkbox"]:checked + label span.complete-cb {
   border-radius: 3px;
 }
 
-
 #filters a.outline {
 	border: 1px solid rgba(0, 0, 51, 0.15);
   border-radius: 3px;
