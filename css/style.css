@@ -336,7 +336,11 @@ input[type="checkbox"]:checked + label span.complete-cb {
 }
 #clear-completed {
   float: right;
-  padding-right: 10px;
+  padding: 5px 10px 0 0;
+	background-color: transparent;
+	border: none;
+	font-size: .75em;
+	
 }
 
 #clear-completed:hover {

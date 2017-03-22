@@ -17,20 +17,16 @@ var todoList = {
     this.htmlTemplate = Handlebars.compile(templateString); 
 		this.footerTemplate = Handlebars.compile(footerString);
     view.setUpEventListeners();
-    this.filter = "/all";
     handler.setUpRouter();
   },
- 
   addTodo: function(itemText) {
     this.todos.push({
       id: util.uuid(),
       todoText: itemText,
       completed: false
     });
-    
   },  
   changeTodo: function(num, newTodo) {
-    
     if(this.todos[num]){
       this.todos[num].todoText = newTodo;
     }else {
@@ -141,25 +137,15 @@ var handler = {
   clearCompleted: function() {
 		console.log('clearCompleted');
     todoList.todos = todoList.getActiveTodos();
+		todoList.filter = 'all';
     view.render();
   },
   routes: {
-    '/all': function(){
-      console.log('routed to all!');
-      todoList.filter = 'all';
+    '/:filter': function(filter){
+      console.log('routed to: ', filter);
+      todoList.filter = filter;
       view.render();
-    },
-    '/active': function(){
-      console.log('routed to active!');
-      todoList.filter = 'active';
-      view.render();
-    },
-    '/completed': function(){
-      console.log('routed to completed!');
-      todoList.filter = 'completed';
-      view.render();
-    },
-    //'/clear': todoList.deleteCompleted;
+    }
   },
   setUpRouter: function(){
     var router = Router(this.routes);
@@ -197,7 +183,7 @@ var view = {
     //check to see if toggle-all should be checked based on whether there are any active todos. If there are no active todos, set property to checked.  
     $('#toggle-all').prop('checked', todoList.getActiveTodos().length === 0);
     
-    //don't show toggle-all button if theres' no todos
+    //don't show toggle-all button or footer if there's no todos
     $('label[for="toggle-all"]').toggle(todoList.todos.length !== 0);
 		$('#footer').toggle(todoList.todos.length !== 0);
     
@@ -209,7 +195,7 @@ var view = {
 		console.log("about to store ", todoList.todos);
     util.store("todos", todoList.todos);
 		
-		this.renderFooter();
+		
 		//footer outlines
 		if (todoList.filter === 'all') {
 			$('#all').addClass('outline');
@@ -224,6 +210,8 @@ var view = {
 			$('#active').removeClass('outline');
 			$('#completed').addClass('outline');
 		}
+		
+		this.renderFooter();
   },
 	renderFooter: function() {
 		var numActive = todoList.getActiveTodos().length;
