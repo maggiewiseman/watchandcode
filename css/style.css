@@ -289,6 +289,7 @@ input[type="checkbox"]:checked + label span.complete-cb {
   padding-top: 20px;
   text-align: left;
   clear: both;
+	position: relative;
   
 }
 #footer p {
@@ -312,11 +313,12 @@ input[type="checkbox"]:checked + label span.complete-cb {
   text-decoration: none;
 }
 
-
-
+#num-todos {
+	position: absolute;
+}
 #filters {
   display: inline;
-  padding-left: 100px;
+  padding-left: 175px;
 }
 
 #filters a {
