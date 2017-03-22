@@ -172,7 +172,6 @@ var view = {
   setUpEventListeners: function() {
     $('#new-todo').on('keyup', handler.add);
     $('#toggle-all').on('change', handler.toggleAll);
-    $('#clear-completed').on('click', handler.clearCompleted);
 		$('#todo-list').on('dblclick', handler.edit)
 			.on('keyup', handler.keyup)
 			.on('focusout', handler.change);
@@ -234,6 +233,8 @@ var view = {
 		var footerInfo = [{numItems: numActive + itemLabel}]
 		var footerHtml = todoList.footerTemplate(footerInfo);
 		$('#footer').html(footerHtml);
+    $('#clear-completed').on('click', handler.clearCompleted);
+
 	}
 	
 };  //end view object
