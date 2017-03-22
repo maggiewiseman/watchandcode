@@ -302,7 +302,9 @@ input[type="checkbox"]:checked + label span.complete-cb {
 #footer p,
 #footer a {
   padding-top: 5px;
-  color: rgba(0, 0, 51, .75)
+  color: rgba(0, 0, 51, .75);
+	border: 1px solid transparent;
+  border-radius: 3px;
 }
 
 #footer a {
@@ -325,10 +327,7 @@ input[type="checkbox"]:checked + label span.complete-cb {
   border: 1px solid rgba(0, 0, 51, 0.15);
   border-radius: 3px;
 }
-#filters a.selected {
-  border: 1px solid rgba(0, 0, 51, 0.15);
-  border-radius: 3px;
-}
+
 
 #filters a.outline {
 	border: 1px solid rgba(0, 0, 51, 0.15);
